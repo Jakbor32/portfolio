@@ -1,4 +1,13 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+import { defaultMetadata } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  ...defaultMetadata,
+  title: 'Projects – Jakub Borowy',
+  description:
+    'Jakub Borowy IT projects: automation workflows, PowerApps, PowerShell scripts, and web applications.',
+}
 
 export default function Projects() {
   return (
