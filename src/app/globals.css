@@ -1,6 +1,38 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
  /* Disable all animations and transitions for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+@theme {
+  --color-bg-light: #F1EFEC;
+  --color-bg-dark: #030303;
+  --color-surface-light: #76ABAE;
+  --color-surface-dark: #31363F;
+  --color-accent-light: #31363F;
+  --color-accent-dark: #76ABAE;
+  --color-text-light: #222831;
+  --color-text-dark: #EEEEEE;
+}
+
+/* Utilities */
+@layer utilities {
+  .mask-fade {
+    -webkit-mask-image: radial-gradient(
+      circle at 130% 140%, 
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-image: radial-gradient(
+      circle at 130% 140%,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-repeat: no-repeat;
+    mask-size: cover;
+  }
 }

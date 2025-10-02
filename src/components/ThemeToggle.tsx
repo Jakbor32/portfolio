@@ -18,16 +18,14 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className="
-        relative inline-flex items-center justify-center
-        p-3 rounded-md
-        bg-white dark:bg-[#191919]
-        text-[#37352f] dark:text-[#ffffffcf]
-        hover:bg-black/5 dark:hover:bg-white/10
-        transition-all duration-200 active:scale-95
-        outline-none focus:outline-none focus-visible:outline-none
-        ring-0 focus:ring-0 focus-visible:ring-0
-        border-0 cursor-pointer
-      "
+  relative inline-flex items-center justify-center
+  p-3 rounded-md
+  text-text-light dark:text-text-dark
+  transition-all duration-200 active:scale-95
+  outline-none focus:outline-none focus-visible:outline-none
+  ring-0 focus:ring-0 focus-visible:ring-0
+  border-0 cursor-pointer
+"
     >
       <span className="relative block w-6 h-6">
         {/* Sun */}
