@@ -1,11 +1,25 @@
+import ReactMarkdown from 'react-markdown'
+
 type ParagraphProps = {
-  children: React.ReactNode
+  children: string
 }
 
 export default function Paragraph({ children }: ParagraphProps) {
   return (
-    <p className="mb-6 max-w-2xl text-base text-gray-600 md:text-lg dark:text-gray-400">
+    <ReactMarkdown
+      components={{
+        p: ({ node, ...props }) => (
+          <p
+            className="mb-6 max-w-2xl text-base text-gray-600 md:text-lg dark:text-gray-400"
+            {...props}
+          />
+        ),
+        a: ({ node, ...props }) => (
+          <a className="text-amber-800 underline" {...props} />
+        ),
+      }}
+    >
       {children}
-    </p>
+    </ReactMarkdown>
   )
 }
