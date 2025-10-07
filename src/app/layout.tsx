@@ -12,7 +12,7 @@ export const metadata: Metadata = defaultMetadata
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark transition-colors duration-300">
+      <body className="bg-bg-light dark:bg-bg-dark text-text-light dark:text-text-dark min-h-screen transition-colors duration-300">
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="system"
@@ -21,11 +21,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="absolute top-4 right-4 z-20">
             <ThemeToggle />
           </div>
-          <div className="fixed inset-0 -z-10 pointer-events-none">
+          <div className="pointer-events-none fixed inset-0 -z-10">
             <Squares squareSize={40} borderColor="#888" />
           </div>
 
-          <main className="flex-1 flex items-center justify-center min-h-dvh relative z-10">
+          <main className="relative z-10 flex min-h-dvh flex-1 items-center justify-center">
             {children}
           </main>
 

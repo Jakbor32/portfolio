@@ -21,8 +21,8 @@ export function Squares({
   }
 
   return (
-    <div className={`relative w-full h-full pointer-events-none ${className}`}>
-      <div className="absolute inset-0 mask-fade" style={style} />
+    <div className={`pointer-events-none relative h-full w-full ${className}`}>
+      <div className="mask-fade absolute inset-0" style={style} />
     </div>
   )
 }

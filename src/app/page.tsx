@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <main className="flex min-h-screen flex-col items-start justify-start px-4 py-10">
-      <section className="container mx-auto text-left animate-fadeInBlur">
+      <section className="animate-fadeInBlur container mx-auto text-left">
         <Headline headline={headline} font={headlineFont.className} />
         <h2
           className={`${socialFont.className} mb-4 text-lg font-semibold text-gray-700 dark:text-gray-300`}
