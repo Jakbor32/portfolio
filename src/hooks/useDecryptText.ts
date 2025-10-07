@@ -15,41 +15,54 @@ function randomBinaryString(length: number) {
 export function useDecryptText(
   text: string,
   {
-    speed = 50,
-    delay = 1000,
+    speed = 20,
+    delay = 500,
     baseLength = 30,
   }: { speed?: number; delay?: number; baseLength?: number } = {}
 ) {
-  const [displayed, setDisplayed] = useState(text);
+  const [displayed, setDisplayed] = useState('');
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     let step = 0;
-    let interval: NodeJS.Timeout;
+    let timeout: NodeJS.Timeout;
+    let phase: 'shrink' | 'decode' = 'shrink';
 
     setDisplayed(randomBinaryString(baseLength));
     setIsDone(false);
 
-    const timeout = setTimeout(() => {
-      interval = setInterval(() => {
-        step++;
+    const run = () => {
+      step++;
 
+      if (phase === 'shrink') {
+        const currentLength = Math.max(baseLength - step, text.length);
+        setDisplayed(randomBinaryString(currentLength));
+
+        if (currentLength === text.length) {
+          phase = 'decode';
+          step = 0;
+        }
+      } else {
         const revealed = text.slice(0, step);
-        const masked = randomBinaryString(Math.max(baseLength - step, 0));
-
+        const masked = randomBinaryString(Math.max(text.length - step, 0));
         setDisplayed(revealed + masked);
 
-        if (step >= Math.max(text.length, baseLength)) {
-          clearInterval(interval);
+        if (step >= text.length) {
+          clearTimeout(timeout);
           setDisplayed(text);
           setIsDone(true);
+          return;
         }
-      }, speed);
-    }, delay);
+      }
+
+      timeout = setTimeout(run, speed);
+    };
+
+    const init = setTimeout(run, delay);
 
     return () => {
+      clearTimeout(init);
       clearTimeout(timeout);
-      clearInterval(interval);
     };
   }, [text, speed, delay, baseLength]);
 

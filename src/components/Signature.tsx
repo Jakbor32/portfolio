@@ -1,24 +1,29 @@
 'use client'
 import { useEffect, useRef } from 'react'
 
-const ANIMATION_DURATION = 50
-const ANIMATION_DELAY_STEP = 15
+const ANIMATION_DURATION = 30
+const ANIMATION_DELAY_STEP = 10
 
 /**
  * Animates each <path> in an SVG to create a "handwriting" effect.
  * Uses strokeDasharray + strokeDashoffset trick to gradually draw paths.
  */
 
-function animateSvgPaths(svg: SVGSVGElement) {
+function initSvgPaths(svg: SVGSVGElement) {
   const paths = svg.querySelectorAll<SVGPathElement>('path')
-
-  let delay = 0
   paths.forEach((path) => {
     const length = path.getTotalLength()
 
     path.style.strokeDasharray = String(length)
     path.style.strokeDashoffset = String(length)
+  })
+}
 
+function animateSvgPaths(svg: SVGSVGElement) {
+  const paths = svg.querySelectorAll<SVGPathElement>('path')
+  let delay = 0
+  paths.forEach((path) => {
+    const length = path.getTotalLength()
     path.animate([{ strokeDashoffset: length }, { strokeDashoffset: 0 }], {
       duration: ANIMATION_DURATION,
       delay,
@@ -34,10 +39,21 @@ export default function Signature() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const svg = containerRef.current?.querySelector('svg')
-    if (!svg) return
+    const handleLoad = () => {
+      const svg = containerRef.current?.querySelector('svg')
+      if (!svg) return
 
-    animateSvgPaths(svg)
+      initSvgPaths(svg)
+
+      setTimeout(() => animateSvgPaths(svg), 500)
+    }
+
+    if (document.readyState === 'complete') {
+      handleLoad()
+    } else {
+      window.addEventListener('load', handleLoad)
+      return () => window.removeEventListener('load', handleLoad)
+    }
   }, [])
 
   return (

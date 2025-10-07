@@ -11,8 +11,8 @@ type DecryptTextProps = {
 
 export default function DecryptText({
   text,
-  speed = 25,
-  delay = 2000,
+  speed = 20,
+  delay = 1500,
   baseLength = 30,
   className,
 }: DecryptTextProps) {
