@@ -17,6 +17,7 @@ export function Squares({
       linear-gradient(90deg, ${borderColor} 1px, transparent 1px)
     `,
     backgroundSize: `${squareSize}px ${squareSize}px`,
+    backgroundAttachment: 'fixed',
   }
 
   return (
