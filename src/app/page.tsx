@@ -1,9 +1,12 @@
 'use client'
 
+export const dynamic = 'force-static'
+
 import { CONTENT } from '@/constants/content'
 import { headlineFont, socialFont, followFont } from '@/styles/fonts'
 
 import Headline from '@/components/Headline'
+import Title from '@/components/Title'
 import Paragraph from '@/components/ui/Paragraph'
 import Follow from '@/components/Follow'
 import Signature from '@/components/Signature'
@@ -15,12 +18,18 @@ export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-start justify-start px-4 py-10">
       <section className="animate-fadeInBlur container mx-auto text-left">
-        <Headline headline={headline} font={headlineFont.className} />
-        <h2
-          className={`${socialFont.className} mb-4 text-lg font-semibold text-gray-700 dark:text-gray-300`}
-        >
-          {title}
-        </h2>
+        <header className="flex flex-col">
+          <Title
+            title={title}
+            font={socialFont.className}
+            className="order-2"
+          />
+          <Headline
+            headline={headline}
+            font={headlineFont.className}
+            className="order-1"
+          />
+        </header>
         {description.map((para, idx) => (
           <Paragraph key={idx}>{para}</Paragraph>
         ))}

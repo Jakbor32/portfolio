@@ -8,6 +8,9 @@ export const defaultMetadata: Metadata = {
   keywords: ['Jakub Borowy', 'IT Specialist', 'portfolio', 'projects', 'skills'],
   authors: [{ name: 'Jakub Borowy' }],
   metadataBase: new URL(baseUrl),
+    alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
     type: 'website',
     url: baseUrl,
