@@ -16,8 +16,8 @@ export default function HomePage() {
   const { headline, title, description, follow, socials, location } = CONTENT
 
   return (
-    <main className="flex min-h-screen flex-col items-start justify-start px-4 py-10">
-      <section className="animate-fadeInBlur container mx-auto text-left">
+    <section className="flex min-h-screen flex-col items-start justify-start px-4 py-10">
+      <div className="animate-fadeInBlur container mx-auto text-left">
         <header className="flex flex-col">
           <Title
             title={title}
@@ -43,7 +43,7 @@ export default function HomePage() {
           location={location}
           className={socialFont.className}
         />
-      </section>
-    </main>
+      </div>
+    </section>
   )
 }
