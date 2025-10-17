@@ -21,18 +21,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="absolute top-4 right-4 z-20">
             <ThemeToggle />
           </div>
-          <div className="pointer-events-none fixed inset-0 -z-10">
+
+          <div className="pointer-events-none fixed inset-0 -z-10 select-none">
             <Squares squareSize={40} borderColor="#888" />
           </div>
 
-          <main className="relative z-10 flex min-h-dvh flex-1 items-center justify-center">
+          <main className="flex min-h-screen flex-1 items-center justify-center">
             {children}
           </main>
 
           <Script
             id="json-ld"
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(jsonLdPerson, null, 2),
+            }}
           />
         </ThemeProvider>
       </body>

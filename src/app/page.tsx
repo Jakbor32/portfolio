@@ -1,7 +1,3 @@
-'use client'
-
-export const dynamic = 'force-static'
-
 import { CONTENT } from '@/constants/content'
 import { headlineFont, socialFont, followFont } from '@/styles/fonts'
 
@@ -11,6 +7,8 @@ import Paragraph from '@/components/ui/Paragraph'
 import Follow from '@/components/Follow'
 import Signature from '@/components/Signature'
 import SocialLinks from '@/components/SocialLinks'
+
+export const dynamic = 'force-static'
 
 export default function HomePage() {
   const { headline, title, description, follow, socials, location } = CONTENT
@@ -30,14 +28,13 @@ export default function HomePage() {
             className="order-1"
           />
         </header>
-        {description.map((para, idx) => (
-          <Paragraph key={idx}>{para}</Paragraph>
+
+        {description.map((para) => (
+          <Paragraph key={para.slice(0, 10)}>{para}</Paragraph>
         ))}
 
         <Follow follow={follow} font={followFont.className} />
-
         <Signature />
-
         <SocialLinks
           socials={socials}
           location={location}
