@@ -18,9 +18,9 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <div
       key={project.title}
-      className="flex flex-col items-start gap-8 rounded-lg bg-neutral-100 p-6 shadow-md transition hover:shadow-lg sm:flex-row sm:items-stretch dark:bg-neutral-800"
+      className="flex flex-col items-start gap-8 rounded-lg p-6 transition sm:flex-row sm:items-stretch"
     >
-      <div className="relative flex h-56 w-full items-center justify-center overflow-hidden rounded-lg bg-white sm:w-1/3 dark:bg-neutral-700">
+      <div className="relative flex h-56 w-full items-center justify-center overflow-hidden rounded-lg sm:w-1/3">
         <Image
           src={project.image}
           alt={project.title}
