@@ -36,7 +36,7 @@ export const projects = [
     image: '/projects/privnote.webp',
     technologies: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Supabase', 'Crypto-js'],
     link: 'https://privnote-app.vercel.app/',
-    github: 'https://github.com/jakbor32/privnote',
+    github: 'https://github.com/Jakbor32/privnote',
   },
   {
     title: 'Okey Card Game Clone',
@@ -45,7 +45,7 @@ export const projects = [
     image: '/projects/okey_card_game.webp',
     technologies: ['React', 'Supabase', 'JavaScript', 'CSS Modules'],
     link: 'https://okey-card-game.netlify.app',
-    github: 'https://github.com/jakbor32/okey-card-game',
+    github: 'https://github.com/Jakbor32/Okey-Card-Game-Clone',
   },
   {
     title: 'SilentWipeScript',
@@ -61,7 +61,7 @@ export const projects = [
       'NAS',
       'Power Automate',
     ],
-    github: 'https://github.com/jakbor32/SilentWipeScript',
+    github: 'https://github.com/Jakbor32/silent-wipe-script',
   },
   {
     title: 'Recruitment App',
@@ -74,7 +74,7 @@ export const projects = [
       'SharePoint',
       'Microsoft Teams Approvals',
     ],
-    github: 'https://github.com/jakbor32/recruitment-app',
+    github: 'https://github.com/Jakbor32/recruitment-app',
   },
   {
     title: 'Auto Approval Cleanup Flow',
@@ -82,7 +82,7 @@ export const projects = [
       'A Power Automate workflow designed to maintain system hygiene by automatically managing and cleaning up outdated Teams approval notifications connected to SharePoint processes. Built with premium connector. It enhances clarity, reduces clutter.',
     image: '/projects/auto_approval_cleanup_flow.webp',
     technologies: ['Power Automate', 'SharePoint', 'Microsoft Teams Approvals', 'Outlook', 'Graph API'],
-    github: 'https://github.com/jakbor32/auto-approval-cleanup-flow',
+    github: 'https://github.com/Jakbor32/auto-approval-cleanup-flow',
   },
   {
     title: 'Portfolio',
@@ -91,7 +91,7 @@ export const projects = [
     image: '/projects/portfolio.webp',
     technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Vercel', 'React'],
     link: 'https://jakubborowy.com',
-    github: 'https://github.com/jakbor32/portfolio',
+    github: 'https://github.com/Jakbor32/portfolio',
   },
   {
     title: 'FluxBoard App',
