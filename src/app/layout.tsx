@@ -6,6 +6,7 @@ import { defaultMetadata, jsonLdPerson } from '@/lib/seo'
 import { ThemeProvider } from 'next-themes'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Squares } from '@/components/ui/SquaresBackground'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = defaultMetadata
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             }}
           />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
