@@ -7,6 +7,11 @@ type SocialLinksProps = {
   className?: string
 }
 
+const DECRYPT_DELAY = 900
+const DECRYPT_SPEED = 28
+const MASK_LENGTH = 32
+const ROW_CLASS = 'px-1'
+
 export default function SocialLinks({
   socials,
   location,
@@ -14,21 +19,36 @@ export default function SocialLinks({
 }: SocialLinksProps) {
   return (
     <address
-      className={`${className} mt-8 space-y-3 text-sm tracking-widest text-amber-800 uppercase not-italic md:text-base dark:text-amber-800`}
+      className={`${className ?? ''} md:text-md mt-8 space-y-2 text-[16px] tracking-[0.22em] text-amber-800 uppercase not-italic dark:text-amber-800`}
     >
-      <p aria-label={`Location: ${location}`}>
-        <DecryptText text={location} />
+      <p aria-label={`Location: ${location}`} className={ROW_CLASS}>
+        <DecryptText
+          text={location}
+          overlay
+          delay={DECRYPT_DELAY}
+          speed={DECRYPT_SPEED}
+          maskPattern="01"
+          maskLength={MASK_LENGTH}
+        />
       </p>
-      {socials.map((social, idx) => (
-        <p key={idx}>
+
+      {socials.map((social) => (
+        <p key={social.href}>
           <Link
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={social.label}
-            className="hover:bg-red-400 hover:text-white dark:hover:bg-red-400"
+            className={`${ROW_CLASS} hover:bg-red-400 hover:text-white dark:hover:bg-red-400`}
           >
-            <DecryptText text={social.text} />
+            <DecryptText
+              text={social.text}
+              overlay
+              delay={DECRYPT_DELAY}
+              speed={DECRYPT_SPEED}
+              maskPattern="01"
+              maskLength={MASK_LENGTH}
+            />
           </Link>
         </p>
       ))}

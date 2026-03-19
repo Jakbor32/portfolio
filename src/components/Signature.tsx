@@ -39,27 +39,27 @@ export default function Signature() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
     const handleLoad = () => {
       const svg = containerRef.current?.querySelector('svg')
       if (!svg) return
-
       initSvgPaths(svg)
-
-      setTimeout(() => animateSvgPaths(svg), 500)
+      timeoutId = setTimeout(() => animateSvgPaths(svg), 500)
     }
-
+    window.addEventListener('load', handleLoad)
     if (document.readyState === 'complete') {
       handleLoad()
-    } else {
-      window.addEventListener('load', handleLoad)
-      return () => window.removeEventListener('load', handleLoad)
+    }
+    return () => {
+      window.removeEventListener('load', handleLoad)
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [])
 
   return (
     <div
       ref={containerRef}
-      className="-mt-8 -mb-14 w-64 text-gray-700 dark:text-gray-200"
+      className="-mt-8 -mb-14 w-64 tracking-tight text-gray-700 dark:text-gray-200"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
