@@ -1,5 +1,3 @@
-'use client'
-
 interface SquaresProps {
   borderColor?: string
   squareSize?: number

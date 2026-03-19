@@ -1,32 +1,23 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { socialFont } from '@/styles/fonts'
+import type { Project } from '@/constants/content'
 
-interface Project {
-  title: string
-  description: string
-  image: string
-  technologies: string[]
-  github?: string
-  link?: string
-  private?: boolean
+type Props = {
+  project: Project
+  eagerImage?: boolean
 }
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project, eagerImage = false }: Props) {
   return (
-    <div
-      key={project.title}
-      className="flex flex-col items-start gap-8 rounded-lg p-6 transition sm:flex-row sm:items-stretch"
-    >
+    <div className="flex flex-col items-start gap-8 rounded-lg p-6 transition sm:flex-row sm:items-stretch">
       <div className="relative flex h-56 w-full items-center justify-center overflow-hidden rounded-lg sm:w-1/3">
         <Image
           src={project.image}
-          alt={project.title}
+          alt={project.imageAlt}
           fill
-          loading="lazy"
-          className="object-fit"
+          loading={eagerImage ? 'eager' : 'lazy'}
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
@@ -42,7 +33,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           </p>
 
           <div className="mb-4 flex flex-wrap gap-2">
-            {project.technologies.map((tech: string) => (
+            {project.technologies.map((tech) => (
               <span
                 key={tech}
                 className="rounded-md bg-neutral-200 px-2 py-0.5 text-xs dark:bg-neutral-700"

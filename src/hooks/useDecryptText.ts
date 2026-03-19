@@ -1,70 +1,83 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-function randomBinaryString(length: number) {
-  return Array.from({ length }, () => (Math.random() > 0.5 ? '1' : '0')).join('');
+function buildMask(length: number, pattern = 'X') {
+  const safePattern = pattern.length > 0 ? pattern : 'X'
+  return safePattern.repeat(Math.ceil(length / safePattern.length)).slice(0, length)
 }
 
-/**
- * Custom hook for "decrypting" text animation.
- * Starts with a binary noise overlay (0/1), 
- * then gradually reveals the target text character by character.
- *
- * Useful for creating a hacking/terminal-like effect.
- */
+function easeOutExpo(t: number) {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+}
+
+function easeVeryLateFinish(t: number) {
+  const slowStart = 0.7
+
+  if (t <= slowStart) return t
+
+  const tailProgress = (t - slowStart) / (1 - slowStart)
+  return slowStart + easeOutExpo(tailProgress) * (1 - slowStart)
+}
+
+type UseDecryptTextOptions = {
+  speed?: number
+  delay?: number
+  maskPattern?: string
+  maskLength?: number
+}
 
 export function useDecryptText(
   text: string,
   {
-    speed = 20,
+    speed = 30,
     delay = 500,
-    baseLength = 30,
-  }: { speed?: number; delay?: number; baseLength?: number } = {}
+    maskPattern = 'X',
+    maskLength = text.length,
+  }: UseDecryptTextOptions = {}
 ) {
-  const [displayed, setDisplayed] = useState('');
-  const [isDone, setIsDone] = useState(false);
+  const finalMaskLength = Math.max(maskLength, text.length)
+  const totalDuration = Math.max(text.length * speed, 300)
+
+  const [progress, setProgress] = useState(0)
+  const [isDone, setIsDone] = useState(false)
 
   useEffect(() => {
-    let step = 0;
-    let timeout: NodeJS.Timeout;
-    let phase: 'shrink' | 'decode' = 'shrink';
 
-    setDisplayed(randomBinaryString(baseLength));
-    setIsDone(false);
+    let frameId = 0
+    let startTimeoutId: ReturnType<typeof setTimeout> | undefined = undefined
+    let startTime = 0
 
-    const run = () => {
-      step++;
+    setProgress(0)
+    setIsDone(false)
 
-      if (phase === 'shrink') {
-        const currentLength = Math.max(baseLength - step, text.length);
-        setDisplayed(randomBinaryString(currentLength));
+    const animate = (time: number) => {
+      if (!startTime) startTime = time
 
-        if (currentLength === text.length) {
-          phase = 'decode';
-          step = 0;
-        }
+      const elapsed = time - startTime
+      const linearProgress = Math.min(elapsed / totalDuration, 1)
+      const easedProgress = easeVeryLateFinish(linearProgress)
+
+      setProgress(easedProgress)
+
+      if (linearProgress < 1) {
+        frameId = window.requestAnimationFrame(animate)
       } else {
-        const revealed = text.slice(0, step);
-        const masked = randomBinaryString(Math.max(text.length - step, 0));
-        setDisplayed(revealed + masked);
-
-        if (step >= text.length) {
-          clearTimeout(timeout);
-          setDisplayed(text);
-          setIsDone(true);
-          return;
-        }
+        setIsDone(true)
       }
+    }
 
-      timeout = setTimeout(run, speed);
-    };
-
-    const init = setTimeout(run, delay);
+    startTimeoutId = setTimeout(() => {
+      frameId = window.requestAnimationFrame(animate)
+    }, delay)
 
     return () => {
-      clearTimeout(init);
-      clearTimeout(timeout);
-    };
-  }, [text, speed, delay, baseLength]);
+      if (startTimeoutId) clearTimeout(startTimeoutId)
+      if (frameId) window.cancelAnimationFrame(frameId)
+    }
+  }, [text, speed, delay, totalDuration])
 
-  return { displayed, isDone };
+  return {
+    progress,
+    isDone,
+    fullMask: buildMask(finalMaskLength, maskPattern),
+  }
 }

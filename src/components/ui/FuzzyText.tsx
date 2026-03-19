@@ -57,6 +57,14 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
       const canvas = canvasRef.current
       if (!canvas) return
 
+      const listeners: Array<
+        [
+          string,
+          EventListenerOrEventListenerObject,
+          (boolean | AddEventListenerOptions)?,
+        ]
+      > = []
+
       const init = async () => {
         if (document.fonts?.ready) {
           await document.fonts.ready
@@ -165,39 +173,54 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
           y >= interactiveTop &&
           y <= interactiveBottom
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMouseMove = (e: Event) => {
           if (!enableHover) return
+          const evt = e as MouseEvent
           const rect = canvas.getBoundingClientRect()
-          const x = e.clientX - rect.left
-          const y = e.clientY - rect.top
+          const x = evt.clientX - rect.left
+          const y = evt.clientY - rect.top
           isHovering = isInsideTextArea(x, y)
         }
 
-        const handleMouseLeave = () => {
+        const handleMouseLeave = (_e: Event) => {
           isHovering = false
         }
 
-        const handleTouchMove = (e: TouchEvent) => {
+        const handleTouchMove = (e: Event) => {
           if (!enableHover) return
-          e.preventDefault()
+          const evt = e as TouchEvent
+          evt.preventDefault()
           const rect = canvas.getBoundingClientRect()
-          const touch = e.touches[0]
+          const touch = evt.touches[0]
           const x = touch.clientX - rect.left
           const y = touch.clientY - rect.top
           isHovering = isInsideTextArea(x, y)
         }
 
-        const handleTouchEnd = () => {
+        const handleTouchEnd = (_e: Event) => {
           isHovering = false
         }
 
         if (enableHover) {
-          canvas.addEventListener('mousemove', handleMouseMove)
-          canvas.addEventListener('mouseleave', handleMouseLeave)
-          canvas.addEventListener('touchmove', handleTouchMove, {
-            passive: false,
-          })
-          canvas.addEventListener('touchend', handleTouchEnd)
+          canvas.addEventListener('mousemove', handleMouseMove as EventListener)
+          listeners.push(['mousemove', handleMouseMove as EventListener])
+          canvas.addEventListener(
+            'mouseleave',
+            handleMouseLeave as EventListener
+          )
+          listeners.push(['mouseleave', handleMouseLeave as EventListener])
+          canvas.addEventListener(
+            'touchmove',
+            handleTouchMove as EventListener,
+            { passive: false }
+          )
+          listeners.push([
+            'touchmove',
+            handleTouchMove as EventListener,
+            { passive: false },
+          ])
+          canvas.addEventListener('touchend', handleTouchEnd as EventListener)
+          listeners.push(['touchend', handleTouchEnd as EventListener])
         }
       }
 
@@ -206,8 +229,27 @@ const FuzzyText = React.forwardRef<HTMLCanvasElement, FuzzyTextProps>(
       return () => {
         isCancelled = true
         window.cancelAnimationFrame(animationFrameId)
+        // Remove all listeners
+        if (canvas) {
+          listeners.forEach(([type, fn, opts]) => {
+            canvas.removeEventListener(type, fn, opts)
+          })
+        }
       }
-    })
+    }, [
+      children,
+      fontSize,
+      fontWeight,
+      fontFamily,
+      color,
+      enableHover,
+      baseIntensity,
+      hoverIntensity,
+      resolvedTheme,
+      className,
+      canvasRef,
+      getComputedColor,
+    ])
 
     return <canvas ref={canvasRef} className={className} />
   }
