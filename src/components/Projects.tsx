@@ -1,5 +1,3 @@
-'use client'
-
 import { headlineFont } from '@/styles/fonts'
 import Link from 'next/link'
 import { projects } from '@/constants/content'

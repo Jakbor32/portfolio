@@ -14,7 +14,7 @@ export default function HomePage() {
   const { headline, title, description, follow, socials, location } = CONTENT
 
   return (
-    <section className="flex min-h-screen flex-col items-start justify-start px-4 py-10">
+    <main className="flex min-h-screen flex-col items-start justify-start px-4 py-10">
       <div className="animate-fadeInBlur container mx-auto text-left">
         <header className="flex flex-col">
           <Title
@@ -30,7 +30,7 @@ export default function HomePage() {
         </header>
 
         {description.map((para) => (
-          <Paragraph key={para.slice(0, 10)}>{para}</Paragraph>
+          <Paragraph key={para}>{para}</Paragraph>
         ))}
 
         <Follow follow={follow} font={followFont.className} />
@@ -41,6 +41,6 @@ export default function HomePage() {
           className={socialFont.className}
         />
       </div>
-    </section>
+    </main>
   )
 }

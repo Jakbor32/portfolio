@@ -27,9 +27,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Squares squareSize={40} borderColor="#888" />
           </div>
 
-          <main className="flex min-h-screen flex-1 items-center justify-center">
+          <div className="flex min-h-screen flex-1 items-center justify-center">
             {children}
-          </main>
+          </div>
 
           <Script
             id="json-ld"
