@@ -19,7 +19,7 @@ export default function SocialLinks({
 }: SocialLinksProps) {
   return (
     <address
-      className={`${className ?? ''} md:text-md mt-8 space-y-2 text-[16px] tracking-[0.22em] text-amber-800 uppercase not-italic dark:text-amber-800`}
+      className={`${className ?? ''} mt-8 space-y-2 text-[13px] tracking-[0.12em] text-amber-800 uppercase not-italic md:text-[16px] md:tracking-[0.18em] dark:text-amber-800`}
     >
       <p aria-label={`Location: ${location}`} className={ROW_CLASS}>
         <DecryptText
