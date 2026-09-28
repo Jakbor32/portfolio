@@ -1,4 +1,3 @@
-
 // Types
 export type SocialLink = {
   label: string
@@ -21,29 +20,29 @@ export type Project = {
 
 // Main content
 export const CONTENT = {
-  headline: "Turning IT \n into solutions",
-  title: "Jakub Borowy — IT Specialist / Cloud & Power Platform Developer",
+  headline: 'Turning IT \n into solutions',
+  title: 'Jakub Borowy — IT Specialist / Cloud & Power Platform Developer',
   description: [
-    "I design, automate, and secure IT systems across Microsoft 365, SharePoint, Power Platform, PowerShell automation, cloud infrastructure, and modern web development. [Explore my projects](/projects)",
-    "Known for bridging IT operations with development: creating tools that solve business needs while keeping environments secure and reliable. Always exploring cloud, scripting, and modern web tech.",
+    'I design, automate, and secure IT systems across Microsoft 365, SharePoint, Power Platform, PowerShell automation, cloud infrastructure, and modern web development. [Explore my projects](/projects)',
+    'Known for bridging IT operations with development: creating tools that solve business needs while keeping environments secure and reliable. Always exploring cloud, scripting, and modern web tech.',
   ],
-  follow: "— Follow my work online",
-  location: "Warsaw, Poland",
+  follow: '— Follow my work online',
+  location: 'Warsaw, Poland',
   socials: [
     {
       label: "Visit Jakub Borowy's GitHub profile",
-      href: "https://github.com/Jakbor32",
-      text: "github.com/Jakbor32",
+      href: 'https://github.com/Jakbor32',
+      text: 'github.com/Jakbor32',
     },
     {
-      label: "Connect with Jakub Borowy on LinkedIn",
-      href: "https://linkedin.com/in/jakubborowy",
-      text: "linkedin.com/in/jakubborowy",
+      label: 'Connect with Jakub Borowy on LinkedIn',
+      href: 'https://linkedin.com/in/jakubborowy',
+      text: 'linkedin.com/in/jakubborowy',
     },
     {
-      label: "Send an email to Jakub Borowy",
-      href: "mailto:borowyjakub32@gmail.com",
-      text: "borowyjakub32@gmail.com",
+      label: 'Send an email to Jakub Borowy',
+      href: 'mailto:borowyjakub32@gmail.com',
+      text: 'borowyjakub32@gmail.com',
     },
   ] satisfies SocialLink[],
 }
@@ -56,9 +55,37 @@ export const projects: Project[] = [
     description:
       'A SharePoint Online org chart web part built with SPFx and Microsoft Graph. Visualizes manager-to-employee hierarchy, supports search, department views, fullscreen mode, and export to PDF/PNG.',
     image: '/projects/org-chart-spfx.webp',
-    imageAlt: 'Org Chart SPFx web part for SharePoint Online showing organizational hierarchy',
-    technologies: ['SPFx', 'TypeScript', 'React', 'SharePoint Online', 'Microsoft Graph'],
+    imageAlt:
+      'Org Chart SPFx web part for SharePoint Online showing organizational hierarchy',
+    technologies: [
+      'SPFx',
+      'TypeScript',
+      'React',
+      'SharePoint Online',
+      'Microsoft Graph',
+    ],
     github: 'https://github.com/Jakbor32/org-chart-spfx',
+    featured: true,
+  },
+  {
+    slug: '365-flow-watcher',
+    title: '365 Flow Watcher',
+    description:
+      'Power Automate dashboard for Microsoft 365 admins: failing runs, orphaned flows left by people who left, and who has access. Recover flows and manage co-owners in one place.',
+    image: '/projects/365-flow-watcher.webp',
+    imageAlt:
+      '365 Flow Watcher dashboard showing Power Automate flows, failures and orphaned owners',
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'Power Automate',
+      'Microsoft Graph',
+      'Entra ID (MSAL)',
+      'TailwindCSS',
+      'Docker',
+    ],
+    link: 'https://365-flow-watcher.vercel.app',
+    github: 'https://github.com/Jakbor32/365-flow-watcher',
     featured: true,
   },
   {
@@ -67,7 +94,8 @@ export const projects: Project[] = [
     description:
       'PowerShell automation for offboarding inactive accounts across Microsoft 365, SharePoint, and Active Directory. Syncs data, secures access, and maintains compliance logs.',
     image: '/projects/silent-wipe-script.webp',
-    imageAlt: 'PowerShell script for automating offboarding in Microsoft 365 and Active Directory',
+    imageAlt:
+      'PowerShell script for automating offboarding in Microsoft 365 and Active Directory',
     technologies: [
       'PowerShell',
       'Microsoft Graph API',
@@ -103,7 +131,13 @@ export const projects: Project[] = [
       'Power Automate workflow for cleaning up outdated Teams approval notifications in SharePoint processes. Maintains clarity and reduces clutter.',
     image: '/projects/auto-approval-cleanup-flow.webp',
     imageAlt: 'Power Automate flow for Teams approval cleanup in SharePoint',
-    technologies: ['Power Automate', 'SharePoint', 'Microsoft Teams Approvals', 'Outlook', 'Graph API'],
+    technologies: [
+      'Power Automate',
+      'SharePoint',
+      'Microsoft Teams Approvals',
+      'Outlook',
+      'Graph API',
+    ],
     github: 'https://github.com/Jakbor32/auto-approval-cleanup-flow',
     featured: true,
   },
@@ -114,7 +148,14 @@ export const projects: Project[] = [
       'End-to-end encrypted note-sharing app with self-destructing messages. AES-256 encryption in the browser for full privacy.',
     image: '/projects/privnote.webp',
     imageAlt: 'PrivNote app for secure, encrypted note sharing',
-    technologies: ['React', 'TypeScript', 'Vite', 'TailwindCSS', 'Supabase', 'Crypto-js'],
+    technologies: [
+      'React',
+      'TypeScript',
+      'Vite',
+      'TailwindCSS',
+      'Supabase',
+      'Crypto-js',
+    ],
     link: 'https://privnote-app.vercel.app/',
     github: 'https://github.com/Jakbor32/privnote',
   },
@@ -147,7 +188,14 @@ export const projects: Project[] = [
       'Personal dashboard for movies, events, notes, and tasks. Real-time sync and PIN-protected access.',
     image: '/projects/fluxboard.webp',
     imageAlt: 'FluxBoard personal dashboard app',
-    technologies: ['React', 'TypeScript', 'Firebase Firestore', 'TailwindCSS', 'Framer Motion', 'Vite'],
+    technologies: [
+      'React',
+      'TypeScript',
+      'Firebase Firestore',
+      'TailwindCSS',
+      'Framer Motion',
+      'Vite',
+    ],
     private: true,
   },
 ]
