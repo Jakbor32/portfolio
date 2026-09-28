@@ -50,24 +50,6 @@ export const CONTENT = {
 // Projects
 export const projects: Project[] = [
   {
-    slug: 'org-chart-spfx',
-    title: 'Org Chart (SPFx)',
-    description:
-      'A SharePoint Online org chart web part built with SPFx and Microsoft Graph. Visualizes manager-to-employee hierarchy, supports search, department views, fullscreen mode, and export to PDF/PNG.',
-    image: '/projects/org-chart-spfx.webp',
-    imageAlt:
-      'Org Chart SPFx web part for SharePoint Online showing organizational hierarchy',
-    technologies: [
-      'SPFx',
-      'TypeScript',
-      'React',
-      'SharePoint Online',
-      'Microsoft Graph',
-    ],
-    github: 'https://github.com/Jakbor32/org-chart-spfx',
-    featured: true,
-  },
-  {
     slug: '365-flow-watcher',
     title: '365 Flow Watcher',
     description:
@@ -86,6 +68,24 @@ export const projects: Project[] = [
     ],
     link: 'https://365-flow-watcher.vercel.app',
     github: 'https://github.com/Jakbor32/365-flow-watcher',
+    featured: true,
+  },
+  {
+    slug: 'org-chart-spfx',
+    title: 'Org Chart (SPFx)',
+    description:
+      'A SharePoint Online org chart web part built with SPFx and Microsoft Graph. Visualizes manager-to-employee hierarchy, supports search, department views, fullscreen mode, and export to PDF/PNG.',
+    image: '/projects/org-chart-spfx.webp',
+    imageAlt:
+      'Org Chart SPFx web part for SharePoint Online showing organizational hierarchy',
+    technologies: [
+      'SPFx',
+      'TypeScript',
+      'React',
+      'SharePoint Online',
+      'Microsoft Graph',
+    ],
+    github: 'https://github.com/Jakbor32/org-chart-spfx',
     featured: true,
   },
   {
