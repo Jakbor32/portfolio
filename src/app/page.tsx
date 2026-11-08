@@ -7,6 +7,7 @@ import Paragraph from '@/components/ui/Paragraph'
 import Follow from '@/components/Follow'
 import Signature from '@/components/Signature'
 import SocialLinks from '@/components/SocialLinks'
+import DrakeWalker from '@/components/DrakeWalker'
 
 export const dynamic = 'force-static'
 
@@ -41,6 +42,7 @@ export default function HomePage() {
           className={socialFont.className}
         />
       </div>
+      <DrakeWalker />
     </main>
   )
 }
