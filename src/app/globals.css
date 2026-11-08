@@ -67,3 +67,106 @@
 * {
   scrollbar-color: #b00020 #111;
 }
+
+/* Borka.exe drake: walks along the bottom edge of the home page.
+   It fades in 2 s after the first paint so it never competes with the
+   main content. With reduced motion the global rule above stops every
+   animation and the drake simply stands in the corner. */
+.drake-walker {
+  position: fixed;
+  left: 0;
+  bottom: 12px;
+  z-index: 30;
+  display: block;
+  line-height: 0;
+  animation:
+    drake-in 0.4s ease-out 2s backwards,
+    drake-walk 46s linear 2s infinite backwards;
+}
+
+/* Narrower screens: shorter lap, so the drake walks at about the same
+   speed (~35 px/s) as on a desktop. */
+@media (max-width: 1024px) {
+  .drake-walker {
+    animation:
+      drake-in 0.4s ease-out 2s backwards,
+      drake-walk 30s linear 2s infinite backwards;
+  }
+}
+
+@media (max-width: 640px) {
+  .drake-walker {
+    animation:
+      drake-in 0.4s ease-out 2s backwards,
+      drake-walk 18s linear 2s infinite backwards;
+  }
+}
+
+.drake-walker:hover,
+.drake-walker:focus-visible {
+  animation-play-state: paused;
+}
+
+.drake-walker:focus-visible {
+  outline: 2px solid #b00020;
+  outline-offset: 4px;
+}
+
+.drake-sprite .drake-frame {
+  opacity: 0;
+  animation: drake-step 0.6s step-end infinite;
+}
+
+.drake-sprite .drake-frame-0 {
+  opacity: 1;
+}
+
+.drake-sprite .drake-frame-1 {
+  animation-delay: -0.45s;
+}
+
+.drake-sprite .drake-frame-2 {
+  animation-delay: -0.3s;
+}
+
+.drake-sprite .drake-frame-3 {
+  animation-delay: -0.15s;
+}
+
+@keyframes drake-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes drake-walk {
+  0% {
+    transform: translateX(-60px);
+  }
+  85%,
+  100% {
+    transform: translateX(calc(100vw + 60px));
+  }
+}
+
+@keyframes drake-step {
+  0% {
+    opacity: 1;
+  }
+  25%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drake-walker {
+    left: 16px;
+  }
+}
+
+@media print {
+  .drake-walker {
+    display: none;
+  }
+}
